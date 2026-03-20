@@ -1,17 +1,22 @@
-🟢 stream_homework — Data Engineering Zoomcamp Module 7 (Streaming with PyFlink)
-Project Overview
+# 🟢 stream_homework — Data Engineering Zoomcamp Module 7 (Streaming with PyFlink)
 
-This project contains the homework solution for Module 7: Streaming with Kafka (Redpanda) and PyFlink in the Data Engineering Zoomcamp
-.
+## Project Overview
 
-We simulate real-time taxi data processing using Green Taxi October 2025 dataset. The project covers:
+This project contains the homework solution for **Module 7: Streaming with Kafka (Redpanda) and PyFlink** in the [Data Engineering Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp).
 
-Streaming data ingestion with Kafka (Redpanda)
-Building Python producers and consumers
-PyFlink streaming jobs using tumbling and session windows
-Writing results to PostgreSQL
-Monitoring via Flink UI
-📁 Project Structure
+We simulate **real-time taxi data processing** using Green Taxi October 2025 dataset. The project covers:
+
+- Streaming data ingestion with Kafka (Redpanda)
+- Building Python producers and consumers
+- PyFlink streaming jobs using **tumbling** and **session windows**
+- Writing results to **PostgreSQL**
+- Monitoring via **Flink UI**
+
+---
+
+## 📁 Project Structure
+
+```text
 07-streaming/
 └── workshop/
     ├── docker-compose.yaml           # Docker Compose setup (Redpanda, Flink, Postgres)
@@ -55,7 +60,7 @@ PostgreSQL — localhost:5432 (user: postgres, password: postgres)
 5. Verify Services
 docker ps
 
-Check:
+Check containers:
 
 stream_homework-redpanda-1
 stream_homework-jobmanager-1
@@ -79,20 +84,28 @@ Submit each job to Flink Job Manager:
 docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/q4_tumbling.py
 docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/q5_session.py
 docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/q6_tips.py
-Table results are written to PostgreSQL
-Check results via:
-SELECT * FROM <your_table_name> LIMIT 10;
-✅ Key Concepts Covered
-Kafka producer/consumer
-PyFlink tumbling windows and session windows
-Streaming with event-time and watermarks
-Writing results to PostgreSQL
-Dockerized environment for Flink + Kafka + PostgreSQL
-📌 References
-Data Engineering Zoomcamp Module 7
-Apache Flink Documentation
-Kafka / Redpanda Documentation
-🚀 Optional Next Steps
-Add Dockerfile for Python dependencies
-Automate producer + Flink job execution with Makefile
-Add unit tests for producer/consumer
+
+Answers
+
+Q4 — Tumbling window (Top pickup location)
+SQL Query
+SELECT PULocationID, num_trips
+FROM trips_window
+ORDER BY num_trips DESC
+LIMIT 3;
+
+
+Q5 — Session window (Longest streak)
+SQL Query
+SELECT PULocationID, num_trips
+FROM session_results
+ORDER BY num_trips DESC
+LIMIT 1;
+
+
+Q6 — Hour with highest total tips
+SQL Query
+SELECT window_start, total_tips
+FROM tips_hourly
+ORDER BY total_tips DESC
+LIMIT 1;
