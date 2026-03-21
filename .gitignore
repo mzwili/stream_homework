@@ -17,7 +17,14 @@ wheels/
 # ======================
 .venv/
 venv/
-.env/
+env/
+
+# ======================
+# Environment Variables (CRITICAL)
+# ======================
+.env
+.env.*
+!.env.example
 
 # ======================
 # UV (package manager)

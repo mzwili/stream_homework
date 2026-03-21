@@ -81,9 +81,9 @@ Reads all messages from green-trips and performs analysis (e.g., trips with dist
 
 Submit each job to Flink Job Manager:
 
-docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/q4_tumbling.py
-docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/q5_session.py
-docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/q6_tips.py
+docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/tumbling_job.py
+docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/session_job.py
+docker exec -it stream_homework-jobmanager-1 flink run -py /opt/src/job/tips_job.py
 
 Answers
 
